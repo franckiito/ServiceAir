@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from users.models import Usuario
+from users.models import Usuario, TipoUsuario
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
@@ -30,9 +30,10 @@ class UsuarioFormSu(forms.ModelForm):
             'password': forms.PasswordInput(),
         }
 
-"""
-        list_display =   ('id','username','password','first_name','last_name',
-'email','is_staff','is_active','is_superuser',
-'is_medical','is_patient','is_physiotherapist',
-'last_login','date_joined')
-"""
+class TipoUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = TipoUsuario
+        exclude = []
+        widgets = {
+            'descripcion': forms.Textarea,
+        }

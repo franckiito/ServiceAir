@@ -1,40 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
-from users.forms import UsuarioForm
-"""
 
-# Create your views here.
-"""
-def add_user(request):
-    if request.method=='POST':
-        usuario_form=UsuarioForm(request.POST)
-
-        if usuario_form.is_valid:
-            try:
-                usuario_form.save()
-
-
-                context = {
-                    'mensaje': 'ok',
-                    'usuario_form': usuario_form
-                }
-                return render(request,'users/index.html', context)
-
-            except:
-                return render(request,'users/index.html')
-        else:
-            usuario_form=UsuarioForm
-        
-        return render(request,'users/index.html')
-"""
 #imports
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import response
 from django.shortcuts import render, redirect
-from users.models import Usuario
-from users.forms import UsuarioForm, LoginForm
+from users.models import Usuario, TipoUsuario
+from users.forms import UsuarioForm, LoginForm, TipoUsuarioForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View, ListView
@@ -42,6 +13,9 @@ from django.utils.decorators import method_decorator
 from django.db.models import Q
 from users.models import Usuario
 from django.contrib.auth import logout as django_logout, authenticate, login as django_login
+
+
+# Create your views here.
 
 #Query que retorna los usuarios
 class UsersQueryset(object):
@@ -225,3 +199,122 @@ class UserEditView(View, UsersQueryset):
             }
             return render(request, 'users/update_user.html', context)
 
+#Query que retorna los usuarios
+class TiposQueryset(object):
+
+    def get_tipos_queryset(self,request):
+        tipos = TipoUsuario.objects.all()
+        return tipos
+
+# probando crear clase para agregar users
+class CreateTipoUsuario(View):
+
+    #@method_decorator(login_required())
+    def get(self,request):
+        """
+        esto cmuestra un formulario para crear un tipo usuario
+        :param request:
+        :return:
+        """
+        form = TipoUsuarioForm()
+        context = {
+            'form': form,
+            'success_message': ''
+        }
+        return render(request, 'users/new_tipo.html', context)
+
+    #@method_decorator(login_required())
+    def post(self,request):
+        """
+        esto cmuestra un formulario para crear un tipo usuario
+        :param request:
+        :return:
+        """
+        success_message = ''
+
+        form = TipoUsuarioForm(request.POST)
+        if form.is_valid():
+
+            typ = TipoUsuario.objects.filter(titulo=form.cleaned_data['nombre'])
+            if len(typ) == 0 : 
+                new_type = form.save()
+                data = { 
+                    'mensaje': 'El Tipo de usuario fue registrado correctamente.', 
+                    'type' : 'success', 
+                    'tittle': 'Registro Tipo de Usuario' 
+                } 
+                return JsonResponse(data)
+            else:
+                data = { 
+                    'mensaje': 'El tipo de usuario ya existe!', 
+                    'type' : 'error', 
+                    'tittle': 'Registro Tipo de Usuario' 
+                } 
+                return JsonResponse(data)
+        else:
+            data = { 
+                'mensaje': 'Error al registrar!', 
+                'type' : 'error', 
+                'tittle': 'Registro Tipo de Usuario' 
+            } 
+            return JsonResponse(data)
+
+#vista para visualizar el detalle de un usuario
+class TipoEditView(View, TiposQueryset):
+    def get(self,request,pk):
+        """
+        Carga la página de detalle de una tipo
+        :param request:
+        :param pk:
+        :return: HttpResponse
+        """
+#        possible_photos = Photo.objects.filter(pk=pk).select_related('owner')
+        possible_tipos = self.get_tipos_queryset(request).filter(pk=pk)#.select_related('owner')
+        tipo = possible_tipos[0] if len(possible_tipos) == 1 else None
+        if tipo is not None:
+            #cargamos el detalle
+            context = {
+                'form': TipoUsuarioForm(instance=tipo)
+            }
+            return render(request, 'users/edit_tipo.html',context)
+        else:
+            return response.HttpResponseNotFound('No existe el usuario')#error 404
+
+    def post(self,request,pk):
+        """
+        esto cmuestra un formulario para crear una foto y la crea
+        :param request:
+        :return:
+        """
+
+        success_message = ''
+        possible_tipos = self.get_tipos_queryset(request).filter(pk=pk)#.select_related('owner')
+        tipo = possible_tipos[0] if len(possible_tipos) == 1 else None
+        if tipo is not None:
+            form = TipoUsuarioForm(request.POST,instance=tipo)
+            if form.is_valid():
+                typ = TipoUsuario.objects.filter(titulo=form.cleaned_data['nombre'])
+                if len(typ) == 0 : 
+                    form.save()
+                    #form = PhotoForm()
+                    data = { 
+                        'mensaje': 'El Tipo de usuario fue editado correctamente.', 
+                        'type' : 'success', 
+                        'tittle': 'Registro Tipo de Usuario' 
+                    } 
+                    return JsonResponse(data)
+                else:
+                    data = { 
+                        'mensaje': 'El tipo de usuario ya existe!', 
+                        'type' : 'success', 
+                        'tittle': 'Registro Tipo de Usuario' 
+                    } 
+                    return JsonResponse(data)
+            else:
+                data = { 
+                    'mensaje': 'Error al editar.', 
+                    'type' : 'success', 
+                    'tittle': 'Registro Tipo de Usuario' 
+                } 
+                return JsonResponse(data)
+            
