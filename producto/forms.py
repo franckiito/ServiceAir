@@ -7,7 +7,7 @@ class BodegaForm(forms.ModelForm):
         model = Bodega
         exclude = []
         widgets = {
-            
+            'descripcion': forms.Textarea,
         }
 
 class TipoFuncionamientoForm(forms.ModelForm):
@@ -15,7 +15,7 @@ class TipoFuncionamientoForm(forms.ModelForm):
         model = TipoFuncionamiento
         exclude = []
         widgets = {
-            
+            'descripcion': forms.Textarea,
         }
 
 class ProductoForm(forms.ModelForm):
@@ -23,7 +23,7 @@ class ProductoForm(forms.ModelForm):
         model = Producto
         exclude = []
         widgets = {
-            
+            'descripcion': forms.Textarea,
         }
 
 class TipoRepuestoForm(forms.ModelForm):
@@ -31,7 +31,7 @@ class TipoRepuestoForm(forms.ModelForm):
         model = TipoRepuesto
         exclude = []
         widgets = {
-            
+            'descripcion': forms.Textarea,
         }
 
 class RepuestoForm(forms.ModelForm):
@@ -39,5 +39,5 @@ class RepuestoForm(forms.ModelForm):
         model = Repuesto
         exclude = []
         widgets = {
-            
+            'descripcion': forms.Textarea,
         }
