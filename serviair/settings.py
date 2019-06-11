@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'producto',
+    'servicios',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# -*- coding: utf-8 -*-
+from django.conf import settings
+
+PUBLIC = 'PUB'
+PRIVATE = 'PRI'
+
+DEFAULT_VISIBILITY = (
+    (PUBLIC, 'Pública'),
+    (PRIVATE, 'Privada')
+)
+
+VISIBILITY = getattr(settings, 'VISIBILITY', DEFAULT_VISIBILITY)
