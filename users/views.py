@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import View, ListView
 from django.utils.decorators import method_decorator
 from django.db.models import Q
-from users.models import Usuario
 from django.contrib.auth import logout as django_logout, authenticate, login as django_login
 
 

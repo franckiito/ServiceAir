@@ -9,6 +9,7 @@ class TipoUsuario(models.Model):
 
 class Usuario(AbstractUser):
     tipo = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
+    
     rut = models.CharField(max_length=11,blank=True)
     fecha_nac = models.DateField(auto_now_add=True)
     direccion = models.CharField(max_length=70,blank=True)
