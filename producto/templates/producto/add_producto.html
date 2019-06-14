@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Registro Producto {% endblock %}
+
+{% block section %}
+
+<!-- Title, Breadcrumb -->
+<div class="breadcrumb-wrapper">
+    <div class="pattern-overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="padding-top40 text-center">
+                        <h3 class="light wow fadeInRight">
+                            Formulario para agregar Producto
+                        </h3>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Title, Breadcrumb -->
+
+    {% if success_message %}
+        {{success_message}}
+    {% else %}
+    <br>
+    <div class="container">
+        <form id="form_add" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.sku|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.nombre|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.descripcion|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.modelo|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.capacidad|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.caudal|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.voltaje|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.consumo|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.corriente|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.nivel_sonoro|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.dimensiones|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.peso|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.refrigerante|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.bodega|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.tipo|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        {{ form.estado|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <input type="button" id="btn_add" class="btn btn-color" value="Agregar">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br><br>
+    {% endif%}
+
+    {% block scripts %}   {% include 'producto/producto.html' %}   {% endblock %} 
+
+{% endblock %}
+
+    

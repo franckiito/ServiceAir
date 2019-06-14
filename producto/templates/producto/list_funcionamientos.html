@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Mantenedor Bodega{% endblock %}
+{% block title %}Mantenedor Funcionamiento{% endblock %}
 
 {%block section %}
 
@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
-                    <h2 class="title">Mantenedor Bodega</h2>
+                    <h2 class="title">Mantenedor Tipo Funcionamiento</h2>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                         <tbody>
                             <tr>
                                 <td class="action no-border">
-                                    <a class="update btn btn-color pull-left" href="{% url 'add_bodega' %}" > Agregar Bodega</a>
+                                    <a class="update btn btn-color pull-left" href="{% url 'add_funcionamiento' %}" > Agregar Tipo Funcionamiento</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -39,18 +39,16 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Descripción</th> 
-                                    <th>Dirección</th>
                                     <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for bodega in bodegas_list %}
+                                {% for func in funcionamientos_list %}
                                     <tr id="datos">
-                                        <td>{{bodega.nombre}}</td>    
-                                        <td>{{bodega.descripcion}}</td>    
-                                        <td>{{bodega.direccion}}</td> 
+                                        <td>{{func.nombre}}</td>    
+                                        <td>{{func.descripcion}}</td>    
                                         <td>
-                                            <a href="{% url 'edit_bodega' pk=bodega.pk %}" ><i class="fa fa-pencil"></i> Editar</a>
+                                            <a href="{% url 'edit_funcionamiento' pk=func.pk %}" ><i class="fa fa-pencil"></i> Editar</a>
                                         </td>    
                                     </tr>
                                 {% endfor %}

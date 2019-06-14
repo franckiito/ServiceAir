@@ -35,10 +35,10 @@ class Producto(models.Model):
     peso = models.IntegerField(blank=True)
     refrigerante = models.CharField(max_length=50,blank=True)
 
-    estado = models.IntegerField(blank=True)
+    estado = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.nombre
+        return self.sku
     
 class TipoRepuesto(models.Model):
     nombre = models.CharField(max_length=50,blank=True)

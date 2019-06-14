@@ -8,3 +8,15 @@ from django.views.generic import View, ListView
 
 def index(request):
     return render(request,'principal/index.html')
+
+def admin(request):
+    return render(request,'principal/admin.html')
+
+#Hay que aplicarlo cuando se tenga listo el admin mientras se usara el def admin para 
+#desarrollar
+""" 
+class AdminView(View):
+    @method_decorator(login_required())
+    def get(self,request):
+        return render(request,'admin.html')
+"""

@@ -16,23 +16,7 @@ from django.contrib.auth import logout as django_logout, authenticate, login as 
 
 # Create your views here.
 
-#Query que retorna los usuarios
-class UsersQueryset(object):
-
-    def get_users_queryset(self,request):
-        """
-        if not request.user.is_authenticated:
-            photos = Photo.objects.filter(visibility=PUBLIC)
-        elif request.user.is_superuser:
-            photos = Photo.objects.all()
-        else:
-            photos = Photo.objects.filter(Q(owner=request.user) | Q(visibility=PUBLIC))
-        """
-        users = Usuario.objects.all()
-        return users
-
-
-#Login y logout
+#region Login y logout
 class LoginView(View):
     def get(self,request):
         error_messages = []
@@ -74,7 +58,24 @@ class LogoutView(View):
             django_logout(request)
         return redirect('index')
 
+#endregion
 
+#region Usuario
+
+#Query que retorna los usuarios
+class UsersQueryset(object):
+
+    def get_users_queryset(self,request):
+        """
+        if not request.user.is_authenticated:
+            photos = Photo.objects.filter(visibility=PUBLIC)
+        elif request.user.is_superuser:
+            photos = Photo.objects.all()
+        else:
+            photos = Photo.objects.filter(Q(owner=request.user) | Q(visibility=PUBLIC))
+        """
+        users = Usuario.objects.all()
+        return users
 
 # probando crear clase para agregar users
 class Create(View):
@@ -100,21 +101,28 @@ class Create(View):
         :param request:
         :return:
         """
-
         success_message = ''
 
         form = UsuarioForm(request.POST)
         if form.is_valid():
+            #if request.user.is_authenticated:
+                #if request.user.is_superuser:
             new_user = form.save()
-            #form = PhotoForm()
-            success_message = 'Usuario guardado con éxito'
+            data = { 
+                'mensaje': 'El Usuario se registro correctamente!', 
+                'type' : 'success', 
+                'tittle': 'Registro de Usuario' 
+            } 
+            return JsonResponse(data)
+            #else: 
+
         else:
-            success_message = 'Informacion no valida'
-        context = {
-            'form': form,
-            'success_message': success_message
-        }
-        return render(request, 'users/new_user.html', context)
+            data = { 
+                'mensaje': 'Error al registrar!', 
+                'type' : 'error', 
+                'tittle': 'Registro de Usuario' 
+            } 
+            return JsonResponse(data)
 
 
 #vista para listar los usuarios OJO es solo para caracter de prueba
@@ -168,9 +176,10 @@ class UserEditView(View, UsersQueryset):
         if usuario is not None:
             #cargamos el detalle
             context = {
-                'form': UsuarioForm(instance=usuario)
+                'form': UsuarioForm(instance=usuario),
+                'id' : usuario.pk
             }
-            return render(request, 'users/update_user.html',context)
+            return render(request, 'users/edit_user.html',context)
         else:
             return response.HttpResponseNotFound('No existe el usuario')#error 404
 
@@ -189,14 +198,30 @@ class UserEditView(View, UsersQueryset):
             if form.is_valid():
                 form.save()
                 #form = PhotoForm()
-                success_message = 'Usuario guardado con éxito'
+                data = { 
+                    'mensaje': 'El usuario fue registrado correctamente.', 
+                    'type' : 'success', 
+                    'tittle': 'Registro de Usuario' 
+                } 
+                return JsonResponse(data)
             else:
-                success_message = 'Informacion no valida'
-            context = {
-                'form': form,
-                'success_message': success_message
-            }
-            return render(request, 'users/update_user.html', context)
+                data = { 
+                    'mensaje': 'No se pudo registrar al usuario correctamente.', 
+                    'type' : 'error', 
+                    'tittle': 'Registro de Usuario' 
+                } 
+                return JsonResponse(data)
+        else:
+            data = { 
+                'mensaje': 'Error al editar!', 
+                'type' : 'error', 
+                'tittle': 'Edición de Usuario' 
+            } 
+            return JsonResponse(data)
+
+#endregion
+
+#region Tipo de Usuario
 
 #Query que retorna los usuarios
 class TiposQueryset(object):
@@ -204,6 +229,15 @@ class TiposQueryset(object):
     def get_tipos_queryset(self,request):
         tipos = TipoUsuario.objects.all()
         return tipos
+
+#vista para listar los tipos de usuario
+class ListTiposView(View):
+    def get(self, request):
+        types_list = TipoUsuario.objects.all()
+        context = {
+            "types_list" : types_list
+        }
+        return render(request,"users/list_type_user.html", context)
 
 # probando crear clase para agregar users
 class CreateTipoUsuario(View):
@@ -220,7 +254,7 @@ class CreateTipoUsuario(View):
             'form': form,
             'success_message': ''
         }
-        return render(request, 'users/new_tipo.html', context)
+        return render(request, 'users/add_type.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):
@@ -234,7 +268,7 @@ class CreateTipoUsuario(View):
         form = TipoUsuarioForm(request.POST)
         if form.is_valid():
 
-            typ = TipoUsuario.objects.filter(titulo=form.cleaned_data['nombre'])
+            typ = TipoUsuario.objects.filter(nombre=form.cleaned_data['nombre'])
             if len(typ) == 0 : 
                 new_type = form.save()
                 data = { 
@@ -259,7 +293,7 @@ class CreateTipoUsuario(View):
             return JsonResponse(data)
 
 #vista para visualizar el detalle de un usuario
-class TipoEditView(View, TiposQueryset):
+class EditTipoView(View, TiposQueryset):
     def get(self,request,pk):
         """
         Carga la página de detalle de una tipo
@@ -273,9 +307,10 @@ class TipoEditView(View, TiposQueryset):
         if tipo is not None:
             #cargamos el detalle
             context = {
-                'form': TipoUsuarioForm(instance=tipo)
+                'form': TipoUsuarioForm(instance=tipo),
+                'id': tipo.pk,
             }
-            return render(request, 'users/edit_tipo.html',context)
+            return render(request, 'users/edit_type_user.html',context)
         else:
             return response.HttpResponseNotFound('No existe el usuario')#error 404
 
@@ -292,28 +327,19 @@ class TipoEditView(View, TiposQueryset):
         if tipo is not None:
             form = TipoUsuarioForm(request.POST,instance=tipo)
             if form.is_valid():
-                typ = TipoUsuario.objects.filter(titulo=form.cleaned_data['nombre'])
-                if len(typ) == 0 : 
-                    form.save()
-                    #form = PhotoForm()
-                    data = { 
-                        'mensaje': 'El Tipo de usuario fue editado correctamente.', 
-                        'type' : 'success', 
-                        'tittle': 'Registro Tipo de Usuario' 
-                    } 
-                    return JsonResponse(data)
-                else:
-                    data = { 
-                        'mensaje': 'El tipo de usuario ya existe!', 
-                        'type' : 'success', 
-                        'tittle': 'Registro Tipo de Usuario' 
-                    } 
-                    return JsonResponse(data)
-            else:
+                form.save()
+                #form = PhotoForm()
                 data = { 
-                    'mensaje': 'Error al editar.', 
+                    'mensaje': 'El Tipo de usuario fue editado correctamente.', 
                     'type' : 'success', 
                     'tittle': 'Registro Tipo de Usuario' 
                 } 
                 return JsonResponse(data)
-            
+            else:
+                data = { 
+                    'mensaje': 'Error al editar.', 
+                    'type' : 'error', 
+                    'tittle': 'Registro Tipo de Usuario' 
+                } 
+                return JsonResponse(data)
+#endregion

@@ -51,7 +51,7 @@ class CreateBodega(View):
 
         if form.is_valid():
             
-            bodega = Bodega.objects.filter(titulo=form.cleaned_data['nombre'])
+            bodega = Bodega.objects.filter(nombre=form.cleaned_data['nombre'])
 
             if len(bodega) == 0 : 
                 new_bodega = form.save()
@@ -103,7 +103,7 @@ class EditBodega(View, BodegaQueryset):
             form = BodegaForm(request.POST,instance=bodega)
             if form.is_valid():
 
-                bodega = TypeDocument.objects.filter(titulo=form.cleaned_data['nombre'])
+                bodega = Bodega.objects.filter(nombre=form.cleaned_data['nombre'])
                 if len(bodega) == 0 : 
                     form.save()
                     data = { 
@@ -159,7 +159,7 @@ class CreateTipoFuncionamiento(View):
             'form': form,
             'success_message': ''
         }
-        return render(request, 'producto/add_tipo_funcionamiento.html', context)
+        return render(request, 'producto/add_funcionamiento.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):
@@ -168,7 +168,7 @@ class CreateTipoFuncionamiento(View):
 
         if form.is_valid():
             
-            func = TipoFuncionamiento.objects.filter(titulo=form.cleaned_data['nombre'])
+            func = TipoFuncionamiento.objects.filter(nombre=form.cleaned_data['nombre'])
 
             if len(func) == 0 : 
                 new_func = form.save()
@@ -220,7 +220,7 @@ class EditTipoFuncionamiento(View, TipoFuncionamientoQueryset):
             form = TipoFuncionamientoForm(request.POST,instance=func)
             if form.is_valid():
 
-                func = TipoFuncionamiento.objects.filter(titulo=form.cleaned_data['nombre'])
+                func = TipoFuncionamiento.objects.filter(nombre=form.cleaned_data['nombre'])
                 if len(func) == 0 : 
                     form.save()
                     data = { 
@@ -286,7 +286,7 @@ class CreateProducto(View):
 
         if form.is_valid():
             
-            prod = Producto.objects.filter(titulo=form.cleaned_data['nombre'])
+            prod = Producto.objects.filter(sku=form.cleaned_data['sku'])
 
             if len(prod) == 0 : 
                 new_prod = form.save()
@@ -338,7 +338,7 @@ class EditProducto(View, ProductoQueryset):
             form = ProductoForm(request.POST,instance=prod)
             if form.is_valid():
 
-                prod = Producto.objects.filter(titulo=form.cleaned_data['nombre'])
+                prod = Producto.objects.filter(nombre=form.cleaned_data['nombre'])
                 if len(prod) == 0 : 
                     form.save()
                     data = { 
@@ -381,9 +381,9 @@ class ListTipoRepuestosView(View):
         tipo_repuestos_list = TipoRepuesto.objects.all()
 
         context = {
-            "tipo_repuestos_list" : tipo_repuestos_list
+            "type_repuestos_list" : tipo_repuestos_list
         }
-        return render(request,"producto/list_tipo_repuestos.html", context)
+        return render(request,"producto/list_type_repuestos.html", context)
 
 #Crea un Tipo de Repuesto
 class CreateTipoRepuesto(View):
@@ -395,7 +395,7 @@ class CreateTipoRepuesto(View):
             'form': form,
             'success_message': ''
         }
-        return render(request, 'producto/add_tipo_repuesto.html', context)
+        return render(request, 'producto/add_type_repuesto.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):
@@ -404,7 +404,7 @@ class CreateTipoRepuesto(View):
 
         if form.is_valid():
             
-            tyr = TipoRepuesto.objects.filter(titulo=form.cleaned_data['nombre'])
+            tyr = TipoRepuesto.objects.filter(nombre=form.cleaned_data['nombre'])
 
             if len(tyr) == 0 : 
                 new_tyr = form.save()
@@ -456,7 +456,7 @@ class EditTipoRepuesto(View, TipoRepuestoQueryset):
             form = TipoRepuestoForm(request.POST,instance=tyr)
             if form.is_valid():
 
-                tyr = TipoRepuesto.objects.filter(titulo=form.cleaned_data['nombre'])
+                tyr = TipoRepuesto.objects.filter(nombre=form.cleaned_data['nombre'])
                 if len(tyr) == 0 : 
                     form.save()
                     data = { 
@@ -523,7 +523,7 @@ class CreateRepuesto(View):
 
         if form.is_valid():
             
-            repuesto = Repuesto.objects.filter(titulo=form.cleaned_data['nombre'])
+            repuesto = Repuesto.objects.filter(nombre=form.cleaned_data['nombre'])
 
             if len(repuesto) == 0 : 
                 new_repuesto = form.save()
@@ -575,7 +575,7 @@ class EditRepuesto(View, RepuestoQueryset):
             form = RepuestoForm(request.POST,instance=repuesto)
             if form.is_valid():
 
-                repuesto = Repuesto.objects.filter(titulo=form.cleaned_data['nombre'])
+                repuesto = Repuesto.objects.filter(nombre=form.cleaned_data['nombre'])
                 if len(repuesto) == 0 : 
                     form.save()
                     data = { 

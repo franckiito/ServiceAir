@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Mantenedor Bodega{% endblock %}
+{% block title %}Mantenedor Usuarios{% endblock %}
 
 {%block section %}
 
@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
-                    <h2 class="title">Mantenedor Bodega</h2>
+                    <h2 class="title">Mantenedor de Usuarios</h2>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                         <tbody>
                             <tr>
                                 <td class="action no-border">
-                                    <a class="update btn btn-color pull-left" href="{% url 'add_bodega' %}" > Agregar Bodega</a>
+                                    <a class="update btn btn-color pull-left" href="{% url 'create_user' %}" > Agregar Usuario</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -37,20 +37,28 @@
                         <table class="shopping-cart-table responsive-table table table-bordered table-striped" id="shopping-cart-table">
                             <thead>
                                 <tr>
+                                    <th>User name</th>
+                                    <th>Rut</th>
                                     <th>Nombre</th>
-                                    <th>Descripción</th> 
+                                    <th>Fecha Nacimiento</th>
+                                    <th>Correo</th>                                    
+                                    <th>Telefono</th>
                                     <th>Dirección</th>
                                     <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for bodega in bodegas_list %}
+                                {% for user in users_list %}
                                     <tr id="datos">
-                                        <td>{{bodega.nombre}}</td>    
-                                        <td>{{bodega.descripcion}}</td>    
-                                        <td>{{bodega.direccion}}</td> 
+                                        <td>{{user.username}}</td>    
+                                        <td>{{user.rut}}</td>    
+                                        <td>{{user.first_name}} {{user.last_name}}</td>    
+                                        <td>{{user.fecha_nac}}</td>    
+                                        <td>{{user.email}}</td>    
+                                        <td>{{user.telefono}}</td>    
+                                        <td>{{user.direccion}}</td>
                                         <td>
-                                            <a href="{% url 'edit_bodega' pk=bodega.pk %}" ><i class="fa fa-pencil"></i> Editar</a>
+                                            <a href="{% url 'user_edit' pk=user.pk %}" ><i class="fa fa-pencil"></i> Editar</a>
                                         </td>    
                                     </tr>
                                 {% endfor %}
