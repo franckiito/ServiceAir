@@ -87,12 +87,20 @@ class Create(View):
         :param request:
         :return:
         """
+
         form = UsuarioForm()
-        context = {
-            'form': form,
-            'success_message': ''
-        }
-        return render(request, 'users/new_user.html', context)
+        if request.user.is_authenticated and request.user.tipo.pk == '1':
+            context = {
+                'form': form,
+                'success_message': ''
+            }
+            return render(request, 'users/new_user.html', context)
+        else:
+            context = {
+                'form': form,
+                'success_message': ''
+            }
+            return render(request, 'users/add_cliente.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):
@@ -103,26 +111,44 @@ class Create(View):
         """
         success_message = ''
 
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            #if request.user.is_authenticated:
-                #if request.user.is_superuser:
-            new_user = form.save()
-            data = { 
-                'mensaje': 'El Usuario se registro correctamente!', 
-                'type' : 'success', 
-                'tittle': 'Registro de Usuario' 
-            } 
-            return JsonResponse(data)
-            #else: 
-
-        else:
-            data = { 
-                'mensaje': 'Error al registrar!', 
-                'type' : 'error', 
-                'tittle': 'Registro de Usuario' 
-            } 
-            return JsonResponse(data)
+        
+        if request.user.is_authenticated and request.user.tipo.pk == '1':
+            form = UsuarioForm(request.POST)
+            if form.is_valid():
+                new_user = form.save()
+                data = { 
+                    'mensaje': 'El Usuario se registro correctamente!', 
+                    'type' : 'success', 
+                    'tittle': 'Registro de Usuario' 
+                } 
+                return JsonResponse(data)
+            else:
+                data = { 
+                    'mensaje': 'Error al registrar 1!', 
+                    'type' : 'error', 
+                    'tittle': 'Registro de Usuario 1' 
+                } 
+                return JsonResponse(data)
+        else: 
+            user = Usuario()
+            user.tipo = TipoUsuario.objects.filter(pk='2')
+            form = UsuarioForm(request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+                data = { 
+                    'mensaje': 'El Usuario se registro correctamente!', 
+                    'type' : 'success', 
+                    'tittle': 'Registro de Usuario' 
+                } 
+                return JsonResponse(data)
+            else:
+                data = { 
+                    'mensaje': 'Error al registrar 2!', 
+                    'type' : 'error', 
+                    'tittle': 'Registro de Usuario 2' 
+                } 
+                return JsonResponse(data)
+       
 
 
 #vista para listar los usuarios OJO es solo para caracter de prueba

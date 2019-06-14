@@ -103,8 +103,8 @@ class EditBodega(View, BodegaQueryset):
             form = BodegaForm(request.POST,instance=bodega)
             if form.is_valid():
 
-                bodega = Bodega.objects.filter(nombre=form.cleaned_data['nombre'])
-                if len(bodega) == 0 : 
+                bodega = Bodega.objects.filter(nombre=form.cleaned_data['nombre'].lower())
+                if len(bodega) <= 1 : 
                     form.save()
                     data = { 
                     'mensaje': 'La bodega se editó correctamente!.', 
