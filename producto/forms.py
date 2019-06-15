@@ -30,9 +30,15 @@ class TipoRepuestoForm(forms.ModelForm):
     class Meta:
         model = TipoRepuesto
         exclude = []
+        labels = { 'nombre': 'Nombre tipo Repuesto', 'descripcion': 'Describe el tipo de repuesto',}
+        help_texts = { 'nombre': 'Ingrese nombre del nuevo tipo de repuesto',
+                       'descripcion': 'ingrese una descripcion para el nuevo tipo de repuesto', }
         widgets = {
             'descripcion': forms.Textarea,
         }
+
+
+
 
 class RepuestoForm(forms.ModelForm):
     class Meta:

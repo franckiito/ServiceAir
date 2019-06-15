@@ -44,6 +44,8 @@ class TipoRepuesto(models.Model):
     nombre = models.CharField(max_length=50,blank=True)
     descripcion = models.CharField(max_length=500,blank=True)
 
+
+
     def __str__(self):
         return self.nombre
 
