@@ -39,9 +39,15 @@ class LoginView(View):
             else:
                 if user.is_active:
                     django_login(request, user)
-                    if user.is_superuser:
-                        url = request.GET.get('next', 'admin')
+                    if user.is_superuser or user.is_staff:
+                        url = request.GET.get('next', 'adm')
                         return redirect(url)
+                    elif user.tipo.nombre == 'admin':
+                        return redirect('adm')
+                    elif user.tipo.nombre == 'cliente':
+                        return redirect('index')
+                    elif user.tipo.nombre == 'tecnico':
+                        return redirect('list_solicitudes')
                     else:
                         return redirect('index')
                 else:
@@ -80,7 +86,7 @@ class UsersQueryset(object):
 # probando crear clase para agregar users
 class Create(View):
 
-    #@method_decorator(login_required())
+    @method_decorator(login_required())
     def get(self,request):
         """
         esto cmuestra un formulario para crear una foto
@@ -89,20 +95,20 @@ class Create(View):
         """
 
         form = UsuarioForm()
-        if request.user.is_authenticated and request.user.tipo.pk == '1':
+        if request.user.is_staff or request.user.tipo.nombre == 'admin':
             context = {
                 'form': form,
                 'success_message': ''
             }
             return render(request, 'users/new_user.html', context)
-        else:
-            context = {
-                'form': form,
-                'success_message': ''
-            }
-            return render(request, 'users/add_cliente.html', context)
 
-    #@method_decorator(login_required())
+        context = {
+            'form': form,
+            'success_message': ''
+        }
+        return redirect('index')
+
+    @method_decorator(login_required())
     def post(self,request):
         """
         esto cmuestra un formulario para crear una foto y la crea
@@ -111,43 +117,32 @@ class Create(View):
         """
         success_message = ''
 
-        
-        if request.user.is_authenticated and request.user.tipo.pk == '1':
+        form = UsuarioForm()
+        if request.user.is_staff or request.user.tipo.nombre == 'admin':
             form = UsuarioForm(request.POST)
             if form.is_valid():
                 new_user = form.save()
                 data = { 
-                    'mensaje': 'El Usuario se registro correctamente!', 
+                    'mensaje': 'El Usuario '+new_user+' se registro correctamente!',
                     'type' : 'success', 
                     'tittle': 'Registro de Usuario' 
                 } 
                 return JsonResponse(data)
             else:
                 data = { 
-                    'mensaje': 'Error al registrar 1!', 
+                    'mensaje': 'Error al registrar!',
                     'type' : 'error', 
-                    'tittle': 'Registro de Usuario 1' 
+                    'tittle': 'Registro de Usuario '
                 } 
                 return JsonResponse(data)
-        else: 
-            user = Usuario()
-            user.tipo = TipoUsuario.objects.filter(pk='2')
-            form = UsuarioForm(request.POST, instance=user)
-            if form.is_valid():
-                form.save()
-                data = { 
-                    'mensaje': 'El Usuario se registro correctamente!', 
-                    'type' : 'success', 
-                    'tittle': 'Registro de Usuario' 
-                } 
-                return JsonResponse(data)
-            else:
-                data = { 
-                    'mensaje': 'Error al registrar 2!', 
-                    'type' : 'error', 
-                    'tittle': 'Registro de Usuario 2' 
-                } 
-                return JsonResponse(data)
+
+        data = {
+            'mensaje': 'Error no log!',
+            'type': 'error',
+            'tittle': 'Registro de Usuario '
+        }
+        return JsonResponse(data)
+
        
 #Vista de registro de usuario
 class RegUserView(View):

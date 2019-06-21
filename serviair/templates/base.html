@@ -65,8 +65,8 @@
                                 <a href="{% url 'users_logout' %}" ><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
                                 {% else %}
                                 
-                                <!--<a href="{% url 'users_login' %}" ><i class="fa fa-sign-in"></i> Iniciar Sesión</a>-->
-                                <a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
+                                <a href="{% url 'users_login' %}" ><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
+                                <!--<a href="users_login" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>-->
                                 <a href="{% url 'registrar' %}" ><i class="fa fa-edit"></i> Registrarse</a>
                                 {% endif %}
                             </div>
