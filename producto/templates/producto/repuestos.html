@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}Repuestos{% endblock %}
+
+{%block section %}
+
+<!-- Main Content -->
+<div class="content margin-top60 margin-bottom60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="display">
+                        <span><b>Monitor:</b></span>
+                        <a class="active btn-small btn-color btn-pad"><i class="fa fa-th"></i></a>
+                        <a class="list btn-small btn-pad" onclick="display(&#39;list&#39;);"><i class="fa fa-th-list"></i></a>
+                    </div>                                       
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right">
+                    <div class="input-group">
+                        <input type="text" value="Buscar Producto" onfocus="if(this.value=='Search Products')this.value='';" onblur="if(this.value=='')this.value='Search Products';" class="search-input form-control product-search-height">
+                        <span class="input-group-btn">
+                        <button type="submit" class="subscribe-btn btn product-search-height"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>  
+                    <!-- /Product Search  -->
+                </div>
+            </div>                    
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-grid">
+                        <div class="products-block">
+                            {% for rep in repuestos %}
+                                {% if forloop.counter|divisibleby:4 %}
+                                    <div class="row product-items">
+                                        <!-- Product Items -->
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 product-cols first">
+                                            <div class="product-block">
+                                                <div class="image ">
+                                                    <span class="product-label product-label-special">
+                                                    <span>NEW</span>
+                                                    </span>
+                                                    <!-- Swap image -->
+                                                    <div class="flip">
+                                                        <a href="product-view.html" class="swap-image">
+                                                        <img src="{{prod.imagen.url}}" title="{{prod.nombre}}" alt="{{prod.nombre}}" class="front imagen-productos">
+                                                        </a>
+                                                    </div>
+                                                    <!-- /Swap image -->
+                                                    <a href="product-view.html" class="pav-colorbox btn btn-theme-default cboxElement"><em class="fa fa-plus"></em><span>View Product</span></a>
+                                                </div>
+                                                <div class="product-meta">
+                                                    <div class="left">
+                                                        <h3 class="name"><a href="product-view.html">{{prod.nombre}}</a></h3>
+                                                        <div class="price">
+                                                            <span class="price-new">${{prod.precio}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="right">
+                                                        <br>
+                                                        <p class="description">
+                                                            {{prod.descripcion}}
+                                                        </p>
+                                                        <div class="action">
+                                                            <div class="cart">
+                                                                <!-- <input type="button" value="" onclick="addToCart('');" class="product-icon fa fa-shopping-cart shopping-cart" /> -->
+                                                                <button class="btn btn-shopping-cart">
+                                                                <span class="fa fa-shopping-cart product-icon hidden-sm">&nbsp;</span>
+                                                                <span>Agregar al Carro</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="button-group">
+                                                                <div class="wishlist">
+                                                                    <a title="Add to Wish List" class="fa fa-heart product-icon">
+                                                                    <span>Agregar a lista</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="compare">
+                                                                    <a title="Add to Compare" class="fa fa-refresh product-icon">
+                                                                    <span>Comparar</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /Product Items -->
+                                    </div>
+                                {% else %}
+                                    <!-- Product Items -->
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 product-cols first">
+                                        <div class="product-block">
+                                            <div class="image ">
+                                                <span class="product-label product-label-special">
+                                                <span>NEW</span>
+                                                </span>
+                                                <!-- Swap image -->
+                                                <div class="flip">
+                                                    <a href="product-view.html" class="swap-image">
+                                                    <img src="{{prod.imagen.url}}" title="{{prod.nombre}}" alt="{{prod.nombre}}" class="front imagen-productos">
+                                                    </a>
+                                                </div>
+                                                <!-- /Swap image -->
+                                                <a href="product-view.html" class="pav-colorbox btn btn-theme-default cboxElement"><em class="fa fa-plus"></em><span>View Product</span></a>
+                                            </div>
+                                            <div class="product-meta">
+                                                <div class="left">
+                                                    <h3 class="name"><a href="product-view.html">{{prod.nombre}}</a></h3>
+                                                    <div class="price">
+                                                        <span class="price-new">${{prod.precio}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <br>
+                                                    <p class="description">
+                                                        {{prod.descripcion}}
+                                                    </p>
+                                                    <div class="action">
+                                                        <div class="cart">
+                                                            <!-- <input type="button" value="" onclick="addToCart('');" class="product-icon fa fa-shopping-cart shopping-cart" /> -->
+                                                            <button class="btn btn-shopping-cart">
+                                                            <span class="fa fa-shopping-cart product-icon hidden-sm">&nbsp;</span>
+                                                            <span>Agregar al Carro</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="button-group">
+                                                            <div class="wishlist">
+                                                                <a title="Add to Wish List" class="fa fa-heart product-icon">
+                                                                <span>Agregar a lista</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="compare">
+                                                                <a title="Add to Compare" class="fa fa-refresh product-icon">
+                                                                <span>Comparar</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Product Items -->
+                                {% endif %}
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pagination-centered padding-bottom30">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#">«</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Main Section -->
+
+{% endblock %}

@@ -34,7 +34,7 @@ class ListTipoServiciosView(View):
         return render(request,"servicios/list_type_servicio.html", context)
 
 #Crear TipoServicio
-class CreateTipoUsuario(View):
+class CreateTipoServicio(View):
 
     #@method_decorator(login_required())
     def get(self,request):
@@ -48,7 +48,7 @@ class CreateTipoUsuario(View):
             'form': form,
             'success_message': ''
         }
-        return render(request, 'users/add_type_servicio.html', context)
+        return render(request, 'servicios/add_type_servicio.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):
@@ -62,25 +62,16 @@ class CreateTipoUsuario(View):
         form = TipoServicioForm(request.POST)
         if form.is_valid():
 
-            typ = TipoServicio.objects.filter(nombre=form.cleaned_data['nombre'])
-            if len(typ) == 0 : 
-                new_type = form.save()
-                data = { 
-                    'mensaje': 'El Tipo de servicio fue registrado correctamente.', 
-                    'type' : 'success', 
-                    'tittle': 'Registro Tipo de servicio' 
-                } 
-                return JsonResponse(data)
-            else:
-                data = { 
-                    'mensaje': 'El tipo de servicio ya existe!', 
-                    'type' : 'error', 
-                    'tittle': 'Registro Tipo de servicio' 
-                } 
-                return JsonResponse(data)
+            form.save()
+            data = { 
+                'mensaje': 'El Tipo de servicio fue registrado correctamente.', 
+                'type' : 'success', 
+                'tittle': 'Registro Tipo de servicio' 
+            } 
+            return JsonResponse(data)
         else:
             data = { 
-                'mensaje': 'Error al registrar!', 
+                'mensaje': 'Formulario invalido!', 
                 'type' : 'error', 
                 'tittle': 'Registro Tipo de servicio' 
             } 

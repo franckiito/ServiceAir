@@ -15,22 +15,30 @@
         </li>
         <li>
             <a id="" href="#Servicio">
-            Servicios
+                Servicios
+                <span class="sf-sub-indicator">
+                <i class="fa fa-angle-down "></i>
+                </span>
+            </a>
+            <ul>
+                {% for typ in type_servicios %}
+                    <li><a href="#" class="sf-with-ul">{{typ.nombre}} </a></li>
+                {% endfor %}
+            </ul>   
+        </li>
+        <li>
+            <a id="" href="products">
+            Productos
             </a>
         </li>
         <li>
-            <a id="" href="#Nosotros">
-            Nosotros
+            <a id="" href="repuests">
+            Repuestos
             </a>
         </li>
         <li>
-            <a id="" href="#Testimonio">
-            Testimonio
-            </a>
-        </li>
-        <li>
-            <a id="" href="#Alcance">
-            Alcance
+            <a id="" href="#contacto">
+            Contacto
             </a>
         </li>
     </ul>

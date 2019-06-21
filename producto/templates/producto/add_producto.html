@@ -28,10 +28,16 @@
         {{success_message}}
     {% else %}
     <br>
+    {% if msg %}
+        <hr>
+        <p>|{% for ms in msg %}{{ msg }}|{% endfor %} </p>
+        <hr>
+    {% endif %}
+    <br>
     <div class="container">
-        <form id="form_add" method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="row">
+            <!--<div class="row">
                 <div class="form-group">
                     <div class="col-md-4">
                         {{ form.sku|as_crispy_field }}
@@ -50,43 +56,17 @@
                         {{ form.modelo|as_crispy_field }}
                     </div>
                     <div class="col-md-4">
-                        {{ form.capacidad|as_crispy_field }}
+                        {{ form.precio|as_crispy_field }}
                     </div>
                     <div class="col-md-4">
-                        {{ form.caudal|as_crispy_field }}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        {{ form.voltaje|as_crispy_field }}
-                    </div>
-                    <div class="col-md-4">
-                        {{ form.consumo|as_crispy_field }}
-                    </div>
-                    <div class="col-md-4">
-                        {{ form.corriente|as_crispy_field }}
+                        {{ form.stock|as_crispy_field }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
                     <div class="col-md-4">
-                        {{ form.nivel_sonoro|as_crispy_field }}
-                    </div>
-                    <div class="col-md-4">
-                        {{ form.dimensiones|as_crispy_field }}
-                    </div>
-                    <div class="col-md-4">
-                        {{ form.peso|as_crispy_field }}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        {{ form.refrigerante|as_crispy_field }}
+                        {{ form.imagen|as_crispy_field }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -107,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            
             <br>
             <div class="row">
                 <div class="form-group">
@@ -114,6 +95,11 @@
                         <input type="button" id="btn_add" class="btn btn-color" value="Agregar">
                     </div>
                 </div>
+            </div>
+            -->
+            {{ form.as_table }}
+            <div>
+                <button class="btn btn-color">Agregar Producto</button>
             </div>
         </form>
     </div>

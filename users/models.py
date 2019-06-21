@@ -11,7 +11,7 @@ class TipoUsuario(models.Model):
         return self.nombre
 
 class Usuario(AbstractUser):
-    tipo = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
+    tipo = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE, null=True,blank=True)
     
     rut = models.CharField(max_length=11,blank=True)
     fecha_nac = models.DateField(auto_now_add=True)

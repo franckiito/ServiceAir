@@ -19,6 +19,12 @@ from django.conf.urls import url
 
 from users.views import Create as CreateUser, ListUsersView, LoginView, LogoutView, UserDetailView, UserEditView, ListTiposView, CreateTipoUsuario, EditTipoView
 from producto.views import *
+from servicios.views import *
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,6 +49,7 @@ urlpatterns = [
     url(r'^funcionamientos$', ListTipoFuncionamientosView.as_view(), name='list_funcionamientos'), #url, lista tipo funcionamientos
     url(r'^funcionamiento/add$', CreateTipoFuncionamiento.as_view(), name='add_funcionamiento'), #url, nuevo tipo funcionamiento
     url(r'^funcionamiento/edit/(?P<pk>[0-9]+)$', EditTipoFuncionamiento.as_view(), name='edit_funcionamiento'), #url, Edita funcionamiento
+    
     url(r'^productos$', ListProductosView.as_view(), name='list_productos'), #url, lista productos
     url(r'^producto/add$', CreateProducto.as_view(), name='add_producto'), #url, nuevo producto
     url(r'^producto/edit/(?P<pk>[0-9]+)$', EditProducto.as_view(), name='edit_producto'), #url, Edita producto
@@ -52,4 +59,12 @@ urlpatterns = [
     url(r'^type_repuestos$', ListTipoRepuestosView.as_view(), name='list_type_repuestos'), #url, lista tipo repuestos
     url(r'^type_repuesto/add$', CreateTipoRepuesto.as_view(), name='add_type_repuesto'), #url, nuevo tipo repuesto
     url(r'^type_repuesto/edit/(?P<pk>[0-9]+)$', EditTipoRepuesto.as_view(), name='edit_type_repuesto'), #url, Edita type repuesto
-]
+
+    #URL's App SERVICIOS
+    url(r'^servicios$', ListTipoServiciosView.as_view(), name='list_type_servicios'), #url, lista servicios
+    url(r'^servicio/add$', CreateTipoServicio.as_view(), name='add_type_servicio'), #url, nuevo servicio
+    url(r'^servicio/edit/(?P<pk>[0-9]+)$', EditTipoServicioView.as_view(), name='edit_type_servicio'), #url, Edita servicio
+] 
+
+if settings.DEBUG: # new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -24,6 +24,7 @@ class ProductoForm(forms.ModelForm):
         exclude = []
         widgets = {
             'descripcion': forms.Textarea,
+            'image': forms.FileInput,
         }
 
 class TipoRepuestoForm(forms.ModelForm):

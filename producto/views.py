@@ -8,8 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import View, ListView
 from django.utils.decorators import method_decorator
 from django.db.models import Q
+
 from producto.models import Bodega, TipoFuncionamiento, Producto, TipoRepuesto, Repuesto
 from producto.forms import BodegaForm, TipoFuncionamientoForm, ProductoForm, TipoRepuestoForm, RepuestoForm
+
 
 # Create your views here.
 
@@ -281,28 +283,28 @@ class CreateProducto(View):
 
     #@method_decorator(login_required())
     def post(self,request):
-        success_message = ''
-        form = ProductoForm(request.POST)
-
+        form = ProductoForm(request.POST, request.FILES)
+        msg = []
         if form.is_valid():
             
-            prod = Producto.objects.filter(sku=form.cleaned_data['sku'])
+            form.save()
+            msg.append("Doc creado correctamente")
 
-            if len(prod) == 0 : 
-                new_prod = form.save()
-                data = { 
-                'mensaje': 'El Producto fue registrado correctamente.', 
-                'type' : 'success', 
-                'tittle': 'Registro Producto' 
-                } 
-                return JsonResponse(data) 
-            else:
-                data = { 
-                'mensaje': 'El Producto ya existe!', 
-                'type' : 'error', 
-                'tittle': 'Registro Producto' 
-                } 
-                return JsonResponse(data) 
+        else:
+            msg.append("DocForm no valido")
+
+            context = { 'form': form,
+                'msg': msg, 
+            }
+            return HttpResponse(request,'producto/add_producto.html',context)
+            
+            """
+            data = { 
+            'mensaje': 'El Producto fue registrado correctamente.', 
+            'type' : 'success', 
+            'tittle': 'Registro Producto' 
+            } 
+            return JsonResponse(data)
         else:
             data = { 
                 'mensaje': 'El Producto no se pudo registrar!', 
@@ -310,6 +312,7 @@ class CreateProducto(View):
                 'tittle': 'Registro Producto' 
             } 
             return JsonResponse(data)
+            """
 
 #vista para editar el producto
 class EditProducto(View, ProductoQueryset):
@@ -338,23 +341,13 @@ class EditProducto(View, ProductoQueryset):
             form = ProductoForm(request.POST,instance=prod)
             if form.is_valid():
 
-                prod = Producto.objects.filter(nombre=form.cleaned_data['nombre'])
-                if len(prod) == 0 : 
-                    form.save()
-                    data = { 
-                    'mensaje': 'El Producto se editó correctamente!.', 
-                    'type' : 'success', 
-                    'tittle': 'Producto' 
-                    } 
-                    return JsonResponse(data) 
-
-                else:
-                    data = { 
-                    'mensaje': 'El Producto ya existe!.', 
-                    'type' : 'error', 
-                    'tittle': 'Producto' 
-                    } 
-                    return JsonResponse(data)
+                prod = form.save()
+                data = { 
+                'mensaje': 'El Producto se editó correctamente!.', 
+                'type' : 'success', 
+                'tittle': 'Producto' 
+                } 
+                return JsonResponse(data)
 
             else:
                 data = { 
