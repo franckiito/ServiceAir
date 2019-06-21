@@ -64,6 +64,12 @@ urlpatterns = [
     url(r'^servicios$', ListTipoServiciosView.as_view(), name='list_type_servicios'), #url, lista servicios
     url(r'^servicio/add$', CreateTipoServicio.as_view(), name='add_type_servicio'), #url, nuevo servicio
     url(r'^servicio/edit/(?P<pk>[0-9]+)$', EditTipoServicioView.as_view(), name='edit_type_servicio'), #url, Edita servicio
+    url(r'^solicitudes$', ListSolicitudesView.as_view(), name='list_solicitudes'), #url, lista solicitudes
+    url(r'^solicitud/add$', CreateSolicitudView.as_view(), name='add_solicitud'), #url, nueva solicitud
+    url(r'^solicitud/edit/(?P<pk>[0-9]+)$', EditSolicitudView.as_view(), name='edit_solicitud'), #url, Edita solicitud
+    url(r'^agendas$', ListAgendamientosView.as_view(), name='list_agendas'), #url, lista agendas
+    url(r'^agenda/add$', CreateAgendamientoView.as_view(), name='add_agenda'), #url, nueva agenda
+    url(r'^agenda/edit/(?P<pk>[0-9]+)$', EditAgendamientoView.as_view(), name='edit_agenda'), #url, Edita agenda
 ] 
 
 if settings.DEBUG: # new

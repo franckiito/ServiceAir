@@ -19,7 +19,7 @@ class Solicitud(models.Model):
     estado = models.CharField(max_length=100,blank=True)
 
     def __str__(self):
-        return self.nombre
+        return self.descripcion
 
 class Agendamiento(models.Model):
     solicitud = models.OneToOneField(

@@ -164,7 +164,7 @@ class CreateSolicitudView(View):
             'form': form,
             'success_message': ''
         }
-        return render(request, 'users/add_solicitud.html', context)
+        return render(request, 'servicios/add_solicitud.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):
@@ -275,7 +275,7 @@ class CreateAgendamientoView(View):
             'form': form,
             'success_message': ''
         }
-        return render(request, 'users/add_agendamiento.html', context)
+        return render(request, 'servicios/add_agendamiento.html', context)
 
     #@method_decorator(login_required())
     def post(self,request):

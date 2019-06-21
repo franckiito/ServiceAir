@@ -2,7 +2,7 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %} Edición Tipo Servicio {% endblock %}
+{% block title %} Edición Tipo Solicitud {% endblock %}
 
 {% block section %}
 
@@ -13,9 +13,9 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="padding-top40 text-center">
-                        <h2 class="light wow fadeIn">Mantenedor Tipo Servicio</h2>
+                        <h2 class="light wow fadeIn">Mantenedor Solicitud</h2>
                         <h4 class="light wow fadeInRight">
-                            Formulario para editar tipo servicio
+                            Formulario para editar Solicitud
                         </h4>
                     </div>
                 </div>    
@@ -33,26 +33,23 @@
             <form id="form_edit" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                {{ form.tipo|as_crispy_field }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form.cliente|as_crispy_field }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form.descripcion|as_crispy_field }}
-                            </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            {{ form.nombre|as_crispy_field }}
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                {{ form.fecha|as_crispy_field }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form.estado|as_crispy_field }}
-                            </div>
+                        <div class="col-md-4">
+                            {{ form.descripcion|as_crispy_field }}
                         </div>
                     </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <input type="button" id="btn_edit" class="btn btn-color" value="Editar">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <br><br>

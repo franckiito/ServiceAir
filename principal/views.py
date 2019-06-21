@@ -21,6 +21,9 @@ def repuests(request):
 def admin(request):
     return render(request,'principal/admin.html')
 
+def tec(request):
+    return render(request,'principal/tecnico.html')
+
 #Hay que aplicarlo cuando se tenga listo el admin mientras se usara el def admin para 
 #desarrollar
 """ 
