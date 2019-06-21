@@ -42,7 +42,7 @@
                                                     <!-- Swap image -->
                                                     <div class="flip">
                                                         <a href="product-view.html" class="swap-image">
-                                                        <img src="{{prod.imagen.url}}" title="{{prod.nombre}}" alt="{{prod.nombre}}" class="front imagen-productos">
+                                                        <img src="{{rep.imagen.url}}" title="{{rep.nombre}}" alt="{{prod.nombre}}" class="front imagen-productos">
                                                         </a>
                                                     </div>
                                                     <!-- /Swap image -->
@@ -50,15 +50,15 @@
                                                 </div>
                                                 <div class="product-meta">
                                                     <div class="left">
-                                                        <h3 class="name"><a href="product-view.html">{{prod.nombre}}</a></h3>
+                                                        <h3 class="name"><a href="product-view.html">{{rep.nombre}}</a></h3>
                                                         <div class="price">
-                                                            <span class="price-new">${{prod.precio}}</span>
+                                                            <span class="price-new">${{rep.precio}}</span>
                                                         </div>
                                                     </div>
                                                     <div class="right">
                                                         <br>
                                                         <p class="description">
-                                                            {{prod.descripcion}}
+                                                            {{rep.descripcion}}
                                                         </p>
                                                         <div class="action">
                                                             <div class="cart">
@@ -88,8 +88,8 @@
                                         <!-- /Product Items -->
                                     </div>
                                 {% else %}
-                                    <!-- Product Items -->
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 product-cols first">
+                                     <!-- Product Items -->
+                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 product-cols first">
                                         <div class="product-block">
                                             <div class="image ">
                                                 <span class="product-label product-label-special">
@@ -98,7 +98,7 @@
                                                 <!-- Swap image -->
                                                 <div class="flip">
                                                     <a href="product-view.html" class="swap-image">
-                                                    <img src="{{prod.imagen.url}}" title="{{prod.nombre}}" alt="{{prod.nombre}}" class="front imagen-productos">
+                                                    <img src="{{rep.imagen.url}}" title="{{rep.nombre}}" alt="{{prod.nombre}}" class="front imagen-productos">
                                                     </a>
                                                 </div>
                                                 <!-- /Swap image -->
@@ -106,15 +106,15 @@
                                             </div>
                                             <div class="product-meta">
                                                 <div class="left">
-                                                    <h3 class="name"><a href="product-view.html">{{prod.nombre}}</a></h3>
+                                                    <h3 class="name"><a href="product-view.html">{{rep.nombre}}</a></h3>
                                                     <div class="price">
-                                                        <span class="price-new">${{prod.precio}}</span>
+                                                        <span class="price-new">${{rep.precio}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="right">
                                                     <br>
                                                     <p class="description">
-                                                        {{prod.descripcion}}
+                                                        {{rep.descripcion}}
                                                     </p>
                                                     <div class="action">
                                                         <div class="cart">

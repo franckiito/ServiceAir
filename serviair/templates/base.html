@@ -86,24 +86,42 @@
                         <!-- /TopNav-->
                         <!-- Logo -->
                         <div class="logo pull-left">
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
                                 <h1>
-                                    <a href="/adm">
-                                    <img class="" src="{% static "img/carrusel/logo.png" %}" alt="DoceMas" width="160" height="60">
+                                    <a href="/tec">
+                                    <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
                                     </a>
                                 </h1>
-                            {% else %}
+                            {% endif %}
+                            {% if user.is_authenticated and user.tipo.nombre == 'admin' or user.is_staff %}
+                            <h1>
+                                <a href="/adm">
+                                <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
+                                </a>
+                            </h1>
+                            {% endif %}
+                            {% if not user.is_authenticated %}
                                 <h1>
                                     <a href="/">
-                                    <img class="" src="{% static "img/carrusel/logo.png" %}" alt="DoceMas" width="160" height="60">
+                                    <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
                                     </a>
                                 </h1>
+                                
                             {% endif %}
                             
                         </div>
                         <!-- /Logo -->
-                        {% block bar_nav %}{% include 'nav_principal.html' %}{% endblock %}
-
+                        {% block bar_nav %}
+                            {% if not user.is_authenticated %}
+                                {% include 'nav_principal.html' %}
+                            {% endif %}
+                            {% if user.is_authenticated and user.tipo.nombre == 'admin' or user.is_staff %}
+                                {% include 'nav_adm.html' %}  
+                            {% endif %}
+                            {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
+                                {% include 'nav_tec.html' %}  
+                            {% endif %}
+                        {% endblock %}
                     </div>
                 </div>
                 <!-- /Main Header -->

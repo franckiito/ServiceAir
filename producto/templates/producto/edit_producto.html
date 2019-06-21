@@ -28,8 +28,23 @@
     {% if success_message %}
         {{success_message}}
     {% else %}
+        {% if msg %}
+            <hr>
+            <p>{% for ms in msg %}{ msg }{% endfor %} </p>
+            <hr>
+        {% endif %}
         <br>
         <div class="container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table align="center">
+                    {{form.as_table}}
+                </table>
+                <div align="center" >
+                    <button class="btn btn-color">Editar</button>
+                </div>
+            </form>
+            <!--
             <form id="form_edit" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
@@ -91,6 +106,7 @@
                     </div>
                 </div>
             </form>
+            -->
         </div>
         <br><br>
     {% endif%}

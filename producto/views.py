@@ -293,26 +293,26 @@ class CreateProducto(View):
         else:
             msg.append("DocForm no valido")
 
-            context = { 'form': form,
-                'msg': msg, 
-            }
-            return HttpResponse(request,'producto/add_producto.html',context)
+        context = { 'form': form,
+            'msg': msg, 
+        }
+        return HttpResponse(request,'producto/add_producto.html',context)
             
-            """
-            data = { 
-            'mensaje': 'El Producto fue registrado correctamente.', 
-            'type' : 'success', 
-            'tittle': 'Registro Producto' 
-            } 
-            return JsonResponse(data)
-        else:
-            data = { 
-                'mensaje': 'El Producto no se pudo registrar!', 
-                'type' : 'error', 
-                'tittle': 'Registro Producto' 
-            } 
-            return JsonResponse(data)
-            """
+"""
+    data = { 
+    'mensaje': 'El Producto fue registrado correctamente.', 
+    'type' : 'success', 
+    'tittle': 'Registro Producto' 
+    } 
+    return JsonResponse(data)
+else:
+    data = { 
+        'mensaje': 'El Producto no se pudo registrar!', 
+        'type' : 'error', 
+        'tittle': 'Registro Producto' 
+    } 
+    return JsonResponse(data)
+"""
 
 #vista para editar el producto
 class EditProducto(View, ProductoQueryset):
@@ -337,25 +337,39 @@ class EditProducto(View, ProductoQueryset):
     def post(self,request,pk):
         possible_productos = self.get_productos_queryset(request).filter(pk=pk)
         prod = possible_productos[0] if len(possible_productos) == 1 else None
+        msg = []
         if prod is not None:
-            form = ProductoForm(request.POST,instance=prod)
+            form = ProductoForm(request.POST,request.FILES,instance=prod)
             if form.is_valid():
 
-                prod = form.save()
-                data = { 
-                'mensaje': 'El Producto se editó correctamente!.', 
-                'type' : 'success', 
-                'tittle': 'Producto' 
-                } 
-                return JsonResponse(data)
+                form.save()
+                msg.append("El producto fue editado correctamente")
 
             else:
-                data = { 
-                'mensaje': 'No se puedo editar!.', 
-                'type' : 'error', 
-                'tittle': 'Producto' 
-                } 
-                return JsonResponse(data) 
+                msg.append("No se pudo editar el producto")
+        else:
+            msg.append("El producto no existe")
+        
+        context = { 'form': form,
+            'msg': msg, 
+        }
+        return render(request, 'producto/edit_producto.html',context)
+"""
+    data = { 
+    'mensaje': 'El Producto se editó correctamente!.', 
+    'type' : 'success', 
+    'tittle': 'Producto' 
+    } 
+    return JsonResponse(data)
+
+else:
+    data = { 
+    'mensaje': 'No se puedo editar!.', 
+    'type' : 'error', 
+    'tittle': 'Producto' 
+    } 
+    return JsonResponse(data) 
+"""
 
 #endregion
 
@@ -449,23 +463,13 @@ class EditTipoRepuesto(View, TipoRepuestoQueryset):
             form = TipoRepuestoForm(request.POST,instance=tyr)
             if form.is_valid():
 
-                tyr = TipoRepuesto.objects.filter(nombre=form.cleaned_data['nombre'])
-                if len(tyr) == 0 : 
-                    form.save()
-                    data = { 
-                    'mensaje': 'El Tipo de Repuesto se editó correctamente!.', 
-                    'type' : 'success', 
-                    'tittle': 'Tipo de Repuesto' 
-                    } 
-                    return JsonResponse(data) 
-
-                else:
-                    data = { 
-                    'mensaje': 'El Tipo de Repuesto ya existe!.', 
-                    'type' : 'error', 
-                    'tittle': 'Tipo de Repuesto' 
-                    } 
-                    return JsonResponse(data)
+                form.save()
+                data = { 
+                'mensaje': 'El Tipo de Repuesto se editó correctamente!.', 
+                'type' : 'success', 
+                'tittle': 'Tipo de Repuesto' 
+                } 
+                return JsonResponse(data) 
 
             else:
                 data = { 
@@ -512,34 +516,50 @@ class CreateRepuesto(View):
     #@method_decorator(login_required())
     def post(self,request):
         success_message = ''
-        form = RepuestoForm(request.POST)
-
+        form = RepuestoForm(request.POST,request.FILES)
+        msg = []
         if form.is_valid():
-            
             repuesto = Repuesto.objects.filter(nombre=form.cleaned_data['nombre'])
-
-            if len(repuesto) == 0 : 
-                new_repuesto = form.save()
-                data = { 
-                'mensaje': 'El Repuesto fue registrado correctamente.', 
-                'type' : 'success', 
-                'tittle': 'Registro Repuesto' 
-                } 
-                return JsonResponse(data) 
+            if len(repuesto) == 0 :
+                form.save()
+                msg.append("Repuesto fue creado correctamente")
             else:
-                data = { 
-                'mensaje': 'El Repuesto ya existe!', 
-                'type' : 'error', 
-                'tittle': 'Registro Repuesto' 
-                } 
-                return JsonResponse(data) 
+                msg.append("El repuesto ya exite!")
         else:
-            data = { 
-                'mensaje': 'El Repuesto no se pudo registrar!', 
-                'type' : 'error', 
-                'tittle': 'Registro Repuesto' 
-            } 
-            return JsonResponse(data)
+            msg.append("DocForm no valido")
+        context = { 'form': form,
+            'msg': msg, 
+        }
+        return render(request,'producto/add_repuesto.html',context)
+
+"""
+if form.is_valid():
+    
+    repuesto = Repuesto.objects.filter(nombre=form.cleaned_data['nombre'])
+
+    if len(repuesto) == 0 : 
+        new_repuesto = form.save()
+        data = { 
+        'mensaje': 'El Repuesto fue registrado correctamente.', 
+        'type' : 'success', 
+        'tittle': 'Registro Repuesto' 
+        } 
+        return JsonResponse(data) 
+    else:
+        data = { 
+        'mensaje': 'El Repuesto ya existe!', 
+        'type' : 'error', 
+        'tittle': 'Registro Repuesto' 
+        } 
+        return JsonResponse(data) 
+else:
+    data = { 
+        'mensaje': 'El Repuesto no se pudo registrar!', 
+        'type' : 'error', 
+        'tittle': 'Registro Repuesto' 
+    } 
+    return JsonResponse(data)
+"""
 
 #vista para editar el tipo de funcionamiento
 class EditRepuesto(View, RepuestoQueryset):
@@ -564,34 +584,50 @@ class EditRepuesto(View, RepuestoQueryset):
     def post(self,request,pk):
         possible_repuestos = self.get_repuestos_queryset(request).filter(pk=pk)
         repuesto = possible_repuestos[0] if len(possible_repuestos) == 1 else None
+        msg = []
         if repuesto is not None:
-            form = RepuestoForm(request.POST,instance=repuesto)
+            form = RepuestoForm(request.POST,request.FILES,instance=repuesto)
             if form.is_valid():
-
-                repuesto = Repuesto.objects.filter(nombre=form.cleaned_data['nombre'])
-                if len(repuesto) == 0 : 
-                    form.save()
-                    data = { 
-                    'mensaje': 'El Repuesto se editó correctamente!.', 
-                    'type' : 'success', 
-                    'tittle': 'Repuesto' 
-                    } 
-                    return JsonResponse(data) 
-
-                else:
-                    data = { 
-                    'mensaje': 'El Repuesto ya existe!.', 
-                    'type' : 'error', 
-                    'tittle': 'Repuesto' 
-                    } 
-                    return JsonResponse(data)
-
+                form.save()
+                msg.append("El repuesto fue editado correctamente")
             else:
-                data = { 
-                'mensaje': 'No se puedo editar!.', 
-                'type' : 'error', 
-                'tittle': 'Repuesto' 
-                } 
-                return JsonResponse(data) 
-                
+                msg.append("El formulario no es valido")    
+        else:
+            msg.append("El repuesto no existe")
+        context = { 'form': form,
+            'msg': msg, 
+        }
+        return render(request,'producto/edit_repuesto.html',context)
+
+"""
+if repuesto is not None:
+    form = RepuestoForm(request.POST,instance=repuesto)
+    if form.is_valid():
+
+        repuesto = Repuesto.objects.filter(nombre=form.cleaned_data['nombre'])
+        if len(repuesto) == 0 : 
+            form.save()
+            data = { 
+            'mensaje': 'El Repuesto se editó correctamente!.', 
+            'type' : 'success', 
+            'tittle': 'Repuesto' 
+            } 
+            return JsonResponse(data) 
+
+        else:
+            data = { 
+            'mensaje': 'El Repuesto ya existe!.', 
+            'type' : 'error', 
+            'tittle': 'Repuesto' 
+            } 
+            return JsonResponse(data)
+
+    else:
+        data = { 
+        'mensaje': 'No se puedo editar!.', 
+        'type' : 'error', 
+        'tittle': 'Repuesto' 
+        } 
+        return JsonResponse(data) 
+"""
 #endregion 

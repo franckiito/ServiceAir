@@ -47,7 +47,7 @@ class LoginView(View):
                     elif user.tipo.nombre == 'cliente':
                         return redirect('index')
                     elif user.tipo.nombre == 'tecnico':
-                        return redirect('list_solicitudes')
+                        return redirect('tec')
                     else:
                         return redirect('index')
                 else:
@@ -164,7 +164,7 @@ class RegUserView(View):
     #@method_decorator(login_required())
     def post(self,request):
         """
-        esto cmuestra un formulario para crear una foto y la crea
+        esto cmuestra un formulario para crea user
         :param request:
         :return:
         """

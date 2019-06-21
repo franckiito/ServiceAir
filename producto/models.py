@@ -48,6 +48,7 @@ class Repuesto(models.Model):
 
     nombre = models.CharField(max_length=50,blank=True)
     descripcion = models.CharField(max_length=500,blank=True)
+    precio = models.IntegerField(blank=True)
     stock = models.IntegerField(blank=True)
     imagen = models.ImageField(upload_to='repuestos/')
 
