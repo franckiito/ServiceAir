@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.http import response
 from django.shortcuts import render, redirect
 from users.models import Usuario, TipoUsuario
-from users.forms import UsuarioForm, LoginForm, TipoUsuarioForm
+from users.forms import UsuarioForm, LoginForm, TipoUsuarioForm, RegUserForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View, ListView
@@ -149,6 +149,49 @@ class Create(View):
                 } 
                 return JsonResponse(data)
        
+#Vista de registro de usuario
+class RegUserView(View):
+
+    #@method_decorator(login_required())
+    def get(self,request):
+        """
+        esto cmuestra un formulario para crear una foto
+        :param request:
+        :return:
+        """
+        form = RegUserForm()
+        context = {
+            'form': form,
+            'msg': '[default]'
+        }
+        return render(request, 'users/registrar.html', context)
+
+    #@method_decorator(login_required())
+    def post(self,request):
+        """
+        esto cmuestra un formulario para crear una foto y la crea
+        :param request:
+        :return:
+        """
+
+        success_message = ''
+        user_with_type = Usuario()
+        posible_tipo = TipoUsuario.objects.filter(nombre='cliente')
+        user_with_type.tipo = posible_tipo[0]
+        form = RegUserForm(request.POST, instance=user_with_type)
+        if form.is_valid():
+            new_user = form.save()
+            #form = PhotoForm()
+            success_message = 'Se a registrado correctamente'
+            return redirect('users_login')
+        else:
+            success_message = 'Informacion no valida'
+        context = {
+            'form': form,
+            'msg': success_message
+        }
+        return render(request, 'users/registrar.html', context)
+
 
 
 #vista para listar los usuarios OJO es solo para caracter de prueba

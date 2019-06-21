@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 
-from users.views import Create as CreateUser, ListUsersView, LoginView, LogoutView, UserDetailView, UserEditView, ListTiposView, CreateTipoUsuario, EditTipoView
+from users.views import Create as CreateUser, ListUsersView, LoginView, LogoutView, UserDetailView, UserEditView, ListTiposView, CreateTipoUsuario, EditTipoView, RegUserView
 from producto.views import *
 from servicios.views import *
 
@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^user/edit/(?P<pk>[0-9]+)$', UserEditView.as_view(), name='user_edit'), #url, Edita Usuario
     url(r'^login$', LoginView.as_view(), name='users_login'), #url, Login
     url(r'^logout$', LogoutView.as_view(), name='users_logout'), #url, Logout
+    url(r'^registrar$', RegUserView.as_view(), name='registrar'), #url del registro de clientes
 
     url(r'^type_user/add$', CreateTipoUsuario.as_view(), name='create_type_user'), #url, nuevo tipo user
     url(r'^type_user$', ListTiposView.as_view(), name='list_type_user'), #url, lista tipo user
