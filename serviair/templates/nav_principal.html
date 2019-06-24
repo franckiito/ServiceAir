@@ -1,0 +1,46 @@
+<!-- Mobile Menu -->
+<div class="mobile navbar-header">
+    <a class="navbar-toggle" data-toggle="collapse" href=".navbar-collapse">
+    <i class="fa fa-bars fa-2x"></i>
+    </a>
+</div>
+<!-- /Mobile Menu -->
+<!-- Menu Start -->
+<nav class="collapse navbar-collapse menu">
+    <ul class="nav navbar-nav sf-menu">
+        <li>
+            <a id="current" href="#">
+            Inicio
+            </a>
+        </li>
+        <li>
+            <a id="" href="#Servicio">
+                Servicios
+                <span class="sf-sub-indicator">
+                <i class="fa fa-angle-down "></i>
+                </span>
+            </a>
+            <ul>
+                {% for typ in type_servicios %}
+                    <li><a href="#" class="sf-with-ul">{{typ.nombre}} </a></li>
+                {% endfor %}
+            </ul>   
+        </li>
+        <li>
+            <a id="" href="products">
+            Productos
+            </a>
+        </li>
+        <li>
+            <a id="" href="repuests">
+            Repuestos
+            </a>
+        </li>
+        <li>
+            <a id="" href="#contacto">
+            Contacto
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- /Menu -->

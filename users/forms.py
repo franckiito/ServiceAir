@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from users.models import Usuario
+from users.models import Usuario, TipoUsuario
 
+#Creacion de usuarios de distintos tipos
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
@@ -11,6 +12,22 @@ class UsuarioForm(forms.ModelForm):
         }
     def save(self, commit=True): # Save the provided password in hashed format #
         user = super(UsuarioForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+
+        if commit:
+            user.save()
+        return user
+
+#Registro de usuarios de tipo cliente
+class RegUserForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        exclude = ['is_staff','is_superuser','last_login','date_joined','groups','user_permissions', 'tipo', ]
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+    def save(self, commit=True): # Save the provided password in hashed format
+        user = super(RegUserForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
 
         if commit:
@@ -30,9 +47,10 @@ class UsuarioFormSu(forms.ModelForm):
             'password': forms.PasswordInput(),
         }
 
-"""
-        list_display =   ('id','username','password','first_name','last_name',
-'email','is_staff','is_active','is_superuser',
-'is_medical','is_patient','is_physiotherapist',
-'last_login','date_joined')
-"""
+class TipoUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = TipoUsuario
+        exclude = []
+        widgets = {
+            'descripcion': forms.Textarea,
+        }

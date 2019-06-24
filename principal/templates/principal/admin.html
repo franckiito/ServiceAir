@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Administrador{% endblock %}
+
+{% block section %}
+
+
+<!-- Services -->
+<div id="services" class="margin-top80">
+    <div class="pattern-overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="padding-top40 text-center">
+                        <h2 class="light wow fadeIn">Servicios de administración</h2>
+                        <h4 class="light wow fadeInRight">
+                            En esta plataforma podra encontrar los siguientes mantenedores y herramientas de administración:
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInLeft">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_productos' %}"><img alt="Producto" src="{% static "img/icons/producto.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_productos' %}">
+                                <h3 class="padding-top25">Producto</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los productos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInLeft">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_funcionamientos' %}"><img alt="Funcionamiento de Producto" src="{% static "img/icons/funcionamiento.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_funcionamientos' %}">
+                                <h3 class="padding-top25">Funcionamiento de Producto</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los funcionamientos de productos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInUp">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_repuestos' %}"><img alt="Repuesto" src="{% static "img/icons/repuesto.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_repuestos' %}">
+                                <h3 class="padding-top25">Repuesto</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los repuestos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInRight">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_type_repuestos' %}"><img alt="Tipo de Repuesto" src="{% static "img/icons/tipo_repuesto.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_type_repuestos' %}">
+                                <h3 class="padding-top25">Tipo de Repuesto</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los tipos de repuesto
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInUp">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_users' %}"><img alt="Usuario" src="{% static "img/icons/usuario.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_users' %}">
+                                <h3 class="padding-top25">Usuario</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los Usuarios
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInRight">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_type_user' %}"><img alt="Tipo Usuario" src="{% static "img/icons/tipo_usuario.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_type_user' %}">
+                                <h3 class="padding-top25">Tipo Usuario</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los tipos de usuarios
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInUp">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_bodegas' %}"><img alt="Bodega" src="{% static "img/icons/bodega.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_bodegas' %}">
+                                <h3 class="padding-top25">Bodega</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar las bodegas
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInUp">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_type_servicios' %}"><img alt="Servicios" src="{% static "img/icons/servicios.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_type_servicios' %}">
+                                <h3 class="padding-top25">Servicios</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar los tipos de Servicios.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInUp">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="#"><img alt="Reportes" src="{% static "img/icons/reporte.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="#">
+                                <h3 class="padding-top25">Reportes</h3>
+                            </a>
+                            <p>
+                                Aqui podrá generar los reportes
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInLeft">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_solicitudes' %}"><img alt="Solicitudes de servicio" src="{% static "img/icons/solicitudes.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_solicitudes' %}">
+                                <h3 class="padding-top25">Solicitudes de servicio</h3>
+                            </a>
+                            <p>
+                                Aqui podrá ver todas las solicitudes de servicios
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Services -->
+
+{% endblock %}

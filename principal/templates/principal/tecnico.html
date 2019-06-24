@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Tecnico{% endblock %}
+
+{% block section %}
+
+
+<!-- Services -->
+<div id="services" class="margin-top80">
+    <div class="pattern-overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="padding-top40 text-center">
+                        <h2 class="light wow fadeIn">Servicios de Tecnico</h2>
+                        <h4 class="light wow fadeInRight">
+                            En esta plataforma podrá encontrar los siguientes funcionalidades:
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInLeft">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_productos' %}"><img alt="Agenda" src="{% static "img/icons/agenda.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_productos' %}">
+                                <h3 class="padding-top25">Agenda</h3>
+                            </a>
+                            <p>
+                                Aqui podrá administrar su agenda
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 text-center wow fadeInLeft">
+                    <div class="service-box padding-top30 padding-bottom40">
+                        <div class="service-box-icon">
+                            <a href="{% url 'list_funcionamientos' %}"><img alt="Solicitudes de servicio" src="{% static "img/icons/solicitudes.png" %}"></a>
+                        </div>
+                        <div class="service-box-info">
+                            <a href="{% url 'list_funcionamientos' %}">
+                                <h3 class="padding-top25">Solicitudes de servicio</h3>
+                            </a>
+                            <p>
+                                Aqui podrá ver todas las solicitudes de servicios disponibles
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- /Services -->
+
+{% endblock %}

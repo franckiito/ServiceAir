@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}ServiceAir{% endblock %}</title>
+        
+        {% load static %}
+
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Library CSS -->
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+        <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+        <link rel="stylesheet" href="{% static "css/fonts/font-awesome/css/font-awesome.css" %}">
+        <link rel="stylesheet" href="{% static "css/animations.css" %}" media="screen">
+        <link rel="stylesheet" href="{% static "css/superfish.css" %}" media="screen">
+        <link rel="stylesheet" href="{% static "css/revolution-slider/css/settings.css" %}" media="screen">
+        <link rel="stylesheet" href="{% static "css/revolution-slider/css/extralayers.css" %}" media="screen">
+        <link rel="stylesheet" href="{% static "css/prettyPhoto.css" %}" media="screen">
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <!-- Skin -->
+        <link rel="stylesheet" href="{% static "css/colors/green.css" %}" class="colors">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static "css/theme-responsive.css" %}">
+        <!--sweetalert-->
+        <link rel="stylesheet" href="{% static "css/sweetalert2.min.css" %}" type="text/css">
+        <!--Estilos propios-->
+        <link rel="stylesheet" href="{% static "css/estilos.css" %}" type="text/css">
+        <!-- Favicons -->
+        <link rel="shortcut icon" href="{% static "img/ico/favicon.ico" %}">
+        <link rel="ServiceAir-icon" href="{% static "img/ico/icon.png" %}">
+        <link rel="ServiceAir-icon" sizes="72x72" href="{% static "img/ico/icon-72.png" %}">
+        <link rel="ServiceAir-icon" sizes="128x128" href="{% static "img/ico/icon-128.png" %}">
+        <link rel="ServiceAir-icon" sizes="144x144" href="{% static "img/ico/icon-144.png" %}">
+        {% block add_head %}{% endblock %}
+    </head>
+    <body class="home">
+        <div class="page-mask">
+            <div class="page-loader">
+                <div class="spinner"></div>
+                Cargando...
+            </div>
+        </div>
+        <!-- Wrap -->
+        <div class="wrap">
+            <!-- Header -->
+            <header id="header">
+                <!-- Header Top Bar -->
+                <div class="top-bar">
+                    <div class="slidedown collapse">
+                        <div class="container">
+                            <div class="pull-left">
+                                <ul class="social pull-left">
+                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="phone-login pull-right">
+                                <a><i class="fa fa-phone"></i> Llamar a : +(56) 9 9888 8372</a>
+                                {% if user.is_authenticated %}
+                                <a> Bienvenido {{user.username}}</a>
+
+                                <a href="{% url 'users_logout' %}" ><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
+                                {% else %}
+                                
+                                <a href="{% url 'users_login' %}" ><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
+                                <!--<a href="users_login" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>-->
+                                <a href="{% url 'registrar' %}" ><i class="fa fa-edit"></i> Registrarse</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Header Top Bar -->
+                <!-- Main Header -->
+                <div class="main-header">
+                    <div class="container">
+                        <!-- TopNav -->
+                        <div class="topnav navbar-header">
+                            <a class="navbar-toggle down-button" data-toggle="collapse" data-target=".slidedown">
+                            <i class="fa fa-angle-down icon-current"></i>
+                            </a>
+                        </div>
+                        <!-- /TopNav-->
+                        <!-- Logo -->
+                        <div class="logo pull-left">
+                        {% block logoo %}
+
+                                                        {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
+                                <h1>
+                                    <a href="/tec">
+                                    <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
+                                    </a>
+                                </h1>
+                            {% endif %}
+                            {% if user.is_authenticated and user.tipo.nombre == 'admin' or user.is_staff %}
+                            <h1>
+                                <a href="/adm">
+                                <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
+                                </a>
+                            </h1>
+                            {% endif %}
+                            {% if not user.is_authenticated %}
+                                <h1>
+                                    <a href="/">
+                                    <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
+                                    </a>
+                                </h1>
+
+                            {% endif %}
+
+                        {% endblock %}
+
+                        </div>
+                        <!-- /Logo -->
+                        {% block bar_nav %}
+                            {% if not user.is_authenticated %}
+                                {% include 'nav_principal.html' %}
+                            {% endif %}
+                            {% if user.is_authenticated and user.tipo.nombre == 'admin' or user.is_staff %}
+                                {% include 'nav_adm.html' %}  
+                            {% endif %}
+                            {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
+                                {% include 'nav_tec.html' %}  
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <!-- /Main Header -->
+            </header>
+            <!-- /Header -->
+            <!-- Main Section -->
+            <section id="main">
+
+                {% block section %}Cuerpo{% endblock %}
+
+            </section>
+            <!-- /Main Section -->
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 ">
+                            <p class="credits">&copy; Copyright 2018 by <a href="https://docemas.pw">DoceMas.pw</a>. Todos los derechos reservados. </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll To Top -->
+            <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+        </div>
+        <!-- /Wrap -->
+        <!-- The Scripts -->
+        <script src="{% static "js/jquery.min.js" %}"></script>
+        <script src="{% static "js/jquery-migrate-1.0.0.js" %}"></script>
+        <script src="{% static "js/jquery-ui.js" %}"></script>
+        <script src="{% static "js/bootstrap.js" %}"></script>
+        <script src="{% static "js/revolution-slider/js/jquery.themepunch.plugins.min.js" %}"></script>
+        <script src="{% static "js/revolution-slider/js/jquery.themepunch.revolution.min.js" %}"></script>
+        <script src="{% static "js/jquery.parallax.js" %}"></script>
+        <script src="{% static "js/jquery.wait.js" %}"></script>
+        <script src="{% static "js/fappear.js" %}"></script>
+        <script src="{% static "js/modernizr-2.6.2.min.js" %}"></script>
+        <script src="{% static "js/jquery.bxslider.min.js" %}"></script>
+        <script src="{% static "js/jquery.prettyPhoto.js" %}"></script>
+        <script src="{% static "js/superfish.js" %}"></script>
+        <script src="{% static "js/tweetMachine.js" %}"></script>
+        <script src="{% static "js/tytabs.js" %}"></script>
+        <script src="{% static "js/jquery.gmap.min.js" %}"></script>
+        <script src="{% static "js/jquery.sticky.js" %}"></script>
+        <script src="{% static "js/jquery.countTo.js" %}"></script>
+        <script src="{% static "js/jflickrfeed.js" %}"></script>
+        <script src="{% static "js/imagesloaded.pkgd.min.js" %}"></script>
+        <script src="{% static "js/waypoints.min.js" %}"></script>
+        <script src="{% static "js/wow.js" %}"></script>
+        <script src="{% static "js/jquery.fitvids.js" %}"></script>
+        <script src="{% static "js/custom.js" %}"></script>
+        <script src="{% static "js/sweetalert2.min.js" %}"></script>
+
+        {% block scripts %}{% endblock %}
+
+
+    </body>
+</html>
+
