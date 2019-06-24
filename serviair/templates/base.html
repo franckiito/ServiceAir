@@ -86,7 +86,9 @@
                         <!-- /TopNav-->
                         <!-- Logo -->
                         <div class="logo pull-left">
-                            {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
+                        {% block logoo %}
+
+                                                        {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
                                 <h1>
                                     <a href="/tec">
                                     <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
@@ -106,9 +108,11 @@
                                     <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
                                     </a>
                                 </h1>
-                                
+
                             {% endif %}
-                            
+
+                        {% endblock %}
+
                         </div>
                         <!-- /Logo -->
                         {% block bar_nav %}

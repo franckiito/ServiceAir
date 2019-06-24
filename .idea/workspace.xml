@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0541caa-58f3-4a5a-aee3-45134f27f680" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/producto/templates/producto/prueba_api_anwo.html" beforeDir="false" afterPath="$PROJECT_DIR$/producto/templates/producto/prueba_api_anwo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serviair/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/serviair/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,8 +58,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/serviair/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1792">
-              <caret line="137" column="15" lean-forward="true" selection-start-line="137" selection-start-column="15" selection-end-line="137" selection-end-column="15" />
+            <state relative-caret-position="135">
+              <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/serviair/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="319">
+              <caret line="111" column="39" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -90,8 +100,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/producto/templates/producto/prueba_api_anwo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="100" column="75" selection-start-line="100" selection-start-column="75" selection-end-line="100" selection-end-column="75" />
+            <state relative-caret-position="-731">
+              <caret line="6" column="37" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -127,22 +137,22 @@
         <option value="$PROJECT_DIR$/users/templates/users/list_users.html" />
         <option value="$PROJECT_DIR$/users/templates/users/registrar.html" />
         <option value="$PROJECT_DIR$/users/templates/users/login.html" />
-        <option value="$PROJECT_DIR$/serviair/templates/base.html" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/61631a50-6188-4fb0-99bd-e64665216e5d/console.sql" />
         <option value="$PROJECT_DIR$/users/views.py" />
         <option value="$PROJECT_DIR$/producto/serializer.py" />
         <option value="$PROJECT_DIR$/producto/api.py" />
-        <option value="$PROJECT_DIR$/serviair/settings.py" />
         <option value="$PROJECT_DIR$/producto/serializers.py" />
         <option value="$PROJECT_DIR$/principal/views.py" />
         <option value="$PROJECT_DIR$/serviair/urls.py" />
         <option value="$PROJECT_DIR$/producto/views.py" />
+        <option value="$PROJECT_DIR$/serviair/settings.py" />
         <option value="$PROJECT_DIR$/producto/templates/producto/prueba_api_anwo.html" />
+        <option value="$PROJECT_DIR$/serviair/templates/base.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="676" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
     <option name="width" value="697" />
     <option name="height" value="735" />
   </component>
@@ -161,25 +171,13 @@
             <path>
               <item name="ServiceAir" type="b2602c69:ProjectViewProjectNode" />
               <item name="ServiceAir" type="462c0819:PsiDirectoryNode" />
-              <item name="producto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ServiceAir" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ServiceAir" type="462c0819:PsiDirectoryNode" />
-              <item name="producto" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ServiceAir" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ServiceAir" type="462c0819:PsiDirectoryNode" />
-              <item name="producto" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="producto" type="462c0819:PsiDirectoryNode" />
+              <item name="serviair" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ServiceAir" type="b2602c69:ProjectViewProjectNode" />
               <item name="ServiceAir" type="462c0819:PsiDirectoryNode" />
               <item name="serviair" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -251,12 +249,12 @@
       <workItem from="1561094283671" duration="9008000" />
       <workItem from="1561363671545" duration="2244000" />
       <workItem from="1561366533679" duration="3005000" />
-      <workItem from="1561371127857" duration="1646000" />
+      <workItem from="1561371127857" duration="2612000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19905000" />
+    <option name="totallyTimeSpent" value="20871000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="676" y="0" width="697" height="735" extended-state="0" />
@@ -438,13 +436,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/serviair/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="67" column="32" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/users/templates/users/list_users.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -529,13 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/serviair/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1792">
-          <caret line="137" column="15" lean-forward="true" selection-start-line="137" selection-start-column="15" selection-end-line="137" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/serviair/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -556,10 +540,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/serviair/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serviair/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="111" column="39" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/producto/templates/producto/prueba_api_anwo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="100" column="75" selection-start-line="100" selection-start-column="75" selection-end-line="100" selection-end-column="75" />
+        <state relative-caret-position="-731">
+          <caret line="6" column="37" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="37" />
         </state>
       </provider>
     </entry>
