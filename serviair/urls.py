@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 
+from producto.api import ProductoListAPI, ProductoDetailAPI
 from users.views import Create as CreateUser, ListUsersView, LoginView, LogoutView, UserDetailView, UserEditView, ListTiposView, CreateTipoUsuario, EditTipoView, RegUserView
 from producto.views import *
 from servicios.views import *
@@ -52,7 +53,6 @@ urlpatterns = [
     url(r'^funcionamiento/edit/(?P<pk>[0-9]+)$', EditTipoFuncionamiento.as_view(), name='edit_funcionamiento'), #url, Edita funcionamiento
     
     url(r'^productos$', ListProductosView.as_view(), name='list_productos'), #url, lista productos
-    url(r'^producto/detail/(?P<pk>[0-9]+)$', ProductoDetailView.as_view(), name='detail_producto'), #url, Detalle producto
     url(r'^producto/add$', CreateProducto.as_view(), name='add_producto'), #url, nuevo producto
     url(r'^producto/edit/(?P<pk>[0-9]+)$', EditProducto.as_view(), name='edit_producto'), #url, Edita producto
     url(r'^repuestos$', ListRepuestosView.as_view(), name='list_repuestos'), #url, lista repuestos
@@ -62,12 +62,17 @@ urlpatterns = [
     url(r'^type_repuesto/add$', CreateTipoRepuesto.as_view(), name='add_type_repuesto'), #url, nuevo tipo repuesto
     url(r'^type_repuesto/edit/(?P<pk>[0-9]+)$', EditTipoRepuesto.as_view(), name='edit_type_repuesto'), #url, Edita type repuesto
 
+# Producto API URLs
+    url(r'^api/1.0/productos/$', ProductoListAPI.as_view(), name='producto_list_api'), #url que saca listado de usuarios
+    url(r'^api/1.0/productos/(?P<pk>[0-9]+)$', ProductoDetailAPI.as_view(), name='producto_detail_api'), #url normal basada en clase,
+
+
     #URL's App SERVICIOS
     url(r'^servicios$', ListTipoServiciosView.as_view(), name='list_type_servicios'), #url, lista servicios
     url(r'^servicio/add$', CreateTipoServicio.as_view(), name='add_type_servicio'), #url, nuevo servicio
     url(r'^servicio/edit/(?P<pk>[0-9]+)$', EditTipoServicioView.as_view(), name='edit_type_servicio'), #url, Edita servicio
     url(r'^solicitudes$', ListSolicitudesView.as_view(), name='list_solicitudes'), #url, lista solicitudes
-    url(r'^solicitud/add/(?P<pk>[0-9]+)$', CreateSolicitudView.as_view(), name='add_solicitud'), #url, nueva solicitud
+    url(r'^solicitud/add$', CreateSolicitudView.as_view(), name='add_solicitud'), #url, nueva solicitud
     url(r'^solicitud/edit/(?P<pk>[0-9]+)$', EditSolicitudView.as_view(), name='edit_solicitud'), #url, Edita solicitud
     url(r'^agendas$', ListAgendamientosView.as_view(), name='list_agendas'), #url, lista agendas
     url(r'^agenda/add$', CreateAgendamientoView.as_view(), name='add_agenda'), #url, nueva agenda

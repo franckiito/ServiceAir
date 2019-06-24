@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'servicios',
     'principal',
     'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,11 @@ DEFAULT_VISIBILITY = (
 VISIBILITY = getattr(settings, 'VISIBILITY', DEFAULT_VISIBILITY)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# REST FRAMEWORK SETTINGS
+"""
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
+"""
