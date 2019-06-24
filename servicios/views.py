@@ -150,45 +150,62 @@ class ListSolicitudesView(View):
         return render(request,"servicios/list_solicitudes.html", context)
 
 #Crear Solicitud
-class CreateSolicitudView(View):
+class CreateSolicitudView(View, TipoServiciosQueryset):
 
     #@method_decorator(login_required())
-    def get(self,request):
+    def get(self,request,pk):
         """
         esto cmuestra un formulario para crear un Solicitud
         :param request:
         :return:
         """
-        form = SolicitudForm()
-        context = {
-            'form': form,
-            'success_message': ''
-        }
-        return render(request, 'servicios/add_solicitud.html', context)
+        possible_types = self.get_types_queryset(request).filter(pk=pk)
+        tipo = possible_types[0] if len(possible_types) == 1 else None
+        if tipo is not None:
+            form = SolicitudForm(instance=tipo)
+            context = {
+                'form': form,
+                'success_message': ''
+            }
+            return render(request, 'servicios/add_solicitud.html', context)
+        else:
+            return response.HttpResponseNotFound('No existe la Solicitud')#error 404
 
     #@method_decorator(login_required())
-    def post(self,request):
+    def post(self,request,pk):
         """
         esto cmuestra un formulario para crear un Solicitud
         :param request:
         :return:
         """
-
-        form = SolicitudForm(request.POST)
-        if form.is_valid():
-            new_type = form.save()
-            data = { 
-                'mensaje': 'La Solicitud fue registrada correctamente.', 
-                'type' : 'success', 
-                'tittle': 'Registro Solicitud' 
-            } 
-            return JsonResponse(data)
-            
+        possible_types = self.get_types_queryset(request).filter(pk=pk)
+        tipo = possible_types[0] if len(possible_types) == 1 else None
+        if tipo is not None:
+            #cliente = Solicitud()
+            #ciente.cliente = request.user #Asigna propietario
+            #form = SolicitudForm(request.POST, instance=tipo, instance=cliente)
+            form = SolicitudForm(request.POST, instance=tipo)
+            if form.is_valid():
+                new_solic = form.save()
+                data = { 
+                    'mensaje': 'La Solicitud fue registrada correctamente.', 
+                    'type' : 'success', 
+                    'tittle': 'Registro Solicitud' 
+                } 
+                return JsonResponse(data)
+                
+            else:
+                data = { 
+                    'mensaje': 'Error al registrar!', 
+                    'type' : 'error', 
+                    'tittle': 'Registro Solicitud' 
+                } 
+                return JsonResponse(data)   
         else:
             data = { 
-                'mensaje': 'Error al registrar!', 
+                'mensaje': 'No existe el Tipo de servicio !', 
                 'type' : 'error', 
-                'tittle': 'Registro Solicitud' 
+                'tittle': 'Tipo Servicio' 
             } 
             return JsonResponse(data)
 

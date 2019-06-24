@@ -269,6 +269,27 @@ class ListProductosView(View):
         }
         return render(request,"producto/list_productos.html", context)
 
+#vista para visualizar el detalle de un usuario
+class ProductoDetailView(View, ProductoQueryset):
+    def get(self,request,pk):
+        """
+        Carga la página de detalle del producto
+        :param request:
+        :param pk:
+        :return: HttpResponse
+        """
+#        possible_photos = Photo.objects.filter(pk=pk).select_related('owner')
+        possible_productos = self.get_productos_queryset(request).filter(pk=pk)#.select_related('owner')
+        producto = possible_productos[0] if len(possible_productos) == 1 else None
+        if producto is not None:
+            #cargamos el detalle
+            context = {
+                'prod': producto
+            }
+            return render(request, 'producto/detail_producto.html',context)
+        else:
+            return response.HttpResponseNotFound('No existe el producto')#error 404
+
 #Crea un Producto
 class CreateProducto(View):
 

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Edición Bodega {% endblock %}
+
+{% block section %}
+
+<!-- Title, Breadcrumb -->
+<div class="breadcrumb-wrapper">
+    <div class="pattern-overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Detalle Producto</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li><a href="{% url 'list_productos' %}">Volver</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Title, Breadcrumb -->
+<!-- Main Content -->
+<div class="content margin-top60 margin-bottom60">
+    <div class="product-item">
+        <div class="container margin-top60">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h2>{{prod.nombre}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                    <div class="simpleLens-gallery-container" id="demo-simpleLens-gallery">
+                        <!-- Single Product Image -->
+                        <div class="simpleLens-container">
+                            <div class="simpleLens-big-image-container">
+                                <a class="simpleLens-lens-image" data-lens-image="{{prod.imagen.url}}">
+                                <img src="{{prod.imagen.url}}" alt="" class="simpleLens-big-image">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /Single Product Image -->
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                    
+                    <!-- Product Details -->
+                    <div class="product-details">
+                        <p><b>Codigo Producto :</b> {{prod.sku}}</p>
+                        <p class="short-description">{{prod.descripcion}}</p>
+                        <p><b>Stock : </b><button type="button" class="btn btn-default btn-sm btn-color">In Stock</button></p>
+                        <p><b>Precio : <button type="button" class="btn btn-default btn-sm">${{prod.precio}}</button></b></p>
+                        <p>
+                            <button type="button" class="btn btn-default btn-sm btn-color"><i class="fa fa-exchange"></i></button>
+                            <button type="button" class="btn btn-default btn-sm btn-color"><i class="fa fa-heart-o"></i></button>                     
+                            <button type="button" class="btn btn-default btn-sm btn-color">Agregar al carro</button>
+                        </p>
+                    </div>
+                    <!-- /Product Details -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
