@@ -152,7 +152,7 @@ class ListSolicitudesView(View):
 #Crear Solicitud
 class CreateSolicitudView(View, TipoServiciosQueryset):
 
-    @method_decorator(login_required())
+    #@method_decorator(login_required())
     def get(self,request,pk):
         """
         esto cmuestra un formulario para crear un Solicitud
@@ -174,7 +174,7 @@ class CreateSolicitudView(View, TipoServiciosQueryset):
         else:
             return response.HttpResponseNotFound('No existe la Solicitud')#error 404
 
-    @method_decorator(login_required())
+    #@method_decorator(login_required())
     def post(self,request,pk):
         """
         esto cmuestra un formulario para crear un Solicitud

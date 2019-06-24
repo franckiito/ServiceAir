@@ -88,13 +88,14 @@
                         <div class="logo pull-left">
                         {% block logoo %}
 
-                                                        {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
+                            {% if user.is_authenticated and user.tipo.nombre == "tecnico" %}
                                 <h1>
                                     <a href="/tec">
                                     <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
                                     </a>
                                 </h1>
                             {% endif %}
+
                             {% if user.is_authenticated and user.tipo.nombre == 'admin' or user.is_staff %}
                             <h1>
                                 <a href="/adm">
@@ -102,7 +103,7 @@
                                 </a>
                             </h1>
                             {% endif %}
-                            {% if not user.is_authenticated %}
+                            {% if not user.is_authenticated or user.tipo.nombre == "cliente" %}
                                 <h1>
                                     <a href="/">
                                     <img class="" src="{% static "img/carrusel/logo.png" %}" alt="ServiceAir" width="160" height="60">
@@ -116,7 +117,7 @@
                         </div>
                         <!-- /Logo -->
                         {% block bar_nav %}
-                            {% if not user.is_authenticated %}
+                            {% if not user.is_authenticated or user.tipo.nombre == "cliente" %}
                                 {% include 'nav_principal.html' %}
                             {% endif %}
                             {% if user.is_authenticated and user.tipo.nombre == 'admin' or user.is_staff %}

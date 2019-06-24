@@ -9,5 +9,11 @@ pip install --upgrade django-crispy-forms
 @echo Instalando Pillow
 pip install Pillow
 
+@echo Instalando Restframework
+pip install djangorestframework
+
+@echo Instalando Requests
+pip install requests
+
 @echo Instalación completa...
 pause
